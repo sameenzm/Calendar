@@ -5,6 +5,9 @@
 	var todayBtn = document.getElementById('now');
 	var yy = y.value;
 	var mm = m.value;
+	for(var i = 1901; i<2050; i++){
+		y.options.add(new Option(i+'年',i));
+	}
 	/* 
 	 * @param {number} year 年份
 	 * @param {number} month 月份(1-12)
@@ -31,7 +34,7 @@
      * @param {number} days 该月总天数(28/29/30/31)
      * @return 渲染页面
      */
-    var render = function(week, days){
+    var render = function(week, days, yyy, mmm){
     	var html = '';
     	var date = document.getElementById('date');
     	// 本月1号前面有几个空格子
@@ -44,7 +47,11 @@
     	for(var i = 1; i <= layer; i++){
     		html += '<tr>';
     		for(var j = 1; j<=7; j++){
-    			html += (b > days || b < 1)?'<td></td>':'<td>'+ b +'</td>';
+    			if(yyy == today.getFullYear() && mmm == today.getMonth()+1 && b == today.getDate()){
+    				html += '<td style="background-color: #ffbb00; color: #fff;">'+ b +'</td>';
+    			}else {
+    				html += (b > days || b < 1)?'<td></td>':'<td>'+ b +'</td>';
+    			}
     			b = ++a - x;
     		}
     		html += '</tr>';
@@ -68,24 +75,23 @@
 	var dumpToToday = function(){
 		var firstWeek = getWeek(today.getFullYear(),today.getMonth()+1);
 		var totalDays = getDays(today.getFullYear(),today.getMonth()+1);
-		render(firstWeek, totalDays,1);
+		y.options[today.getFullYear()-1901].setAttribute('selected',true);
+		m.options[today.getMonth()+1].setAttribute('selected',true);
+		render(firstWeek, totalDays,today.getFullYear(),today.getMonth()+1);
 	}
-    var firstWeek = getWeek(today.getFullYear(),today.getMonth()+1);
-    var totalDays = getDays(today.getFullYear(),today.getMonth()+1);
-    render(firstWeek, totalDays,1);
+	dumpToToday();
 	y.onchange = function() {
 		yy = this.value;
 		var week = getWeek(yy,mm);
 		var days = getDays(yy,mm);
-		render(week,days);
+		render(week,days,yy,mm);
 	}
 	m.onchange = function() {
 		mm = this.value;
 		var week = getWeek(yy,mm);
 		var days = getDays(yy,mm);
-		render(week,days);
+		render(week,days,yy,mm);
 	}
-
 	todayBtn.onclick = dumpToToday;
 
 })()
