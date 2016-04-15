@@ -1,0 +1,46 @@
+@charset "UTF-8";
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+html,
+body,
+div,span
+h1,h2,h3,h4,h5,h6
+p{
+	margin: 0;
+	padding: 0;
+}
+#calendar {
+	width: 500px;
+	min-height: 400px;
+	position: relative;
+	left: 50%;
+	margin-left: -250px;
+	/*margin: 60px auto 0;*/
+}
+#tb-head {
+	width: inherit;
+}
+#tb-head select, #tb-head button {
+	height: 30px;
+	width: 110px;
+}
+table {
+	margin-top: 10px;
+	width: 460px;
+	border: 3px solid #72b9ff;
+}
+th, td{
+	font-size: 18px;
+	font-family: arial;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	padding: 4px 0 6px;
+	border-bottom: 1px solid #c8cacc;
+}
+th{
+	font-weight: 400;
+}
