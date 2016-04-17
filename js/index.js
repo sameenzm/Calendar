@@ -1,5 +1,5 @@
 (function(){
-	var today = new Date();
+    var today = new Date();
     var y = document.getElementById('year');
 	var m = document.getElementById('month');
 	var todayBtn = document.getElementById('now');
@@ -14,18 +14,16 @@
 	 * @return {number} 该月第一天是星期几（0-6）[0是星期日]
 	 */
 	var getWeek = function(year, month){
-		month--;
-        var d = new Date(year, month, 1);
-        return (d.getDay());
-    };
+          var d = new Date(year, --month, 1);
+          return (d.getDay());
+        };
     /* 
      * @param {number} year 年份
      * @param {number} month 月份(1-12)
      * @return {number}  获取一个月多少天(28/29/30/31)
      */
     var getDays = function getDays(year, month){
-        month--;
-        var d = new Date(year,month,1);
+        var d = new Date(year, --month,1);
         d.setDate(32);
         return (32-d.getDate());
     };
@@ -71,7 +69,7 @@
 	    var div = document.createElement('div')
 	    div.innerHTML = '<table>' + html + '</table>';
 	    tbody.parentNode.replaceChild(div.firstChild.firstChild, tbody);
-	}
+    }
 	var dumpToToday = function(){
 		var firstWeek = getWeek(today.getFullYear(),today.getMonth()+1);
 		var totalDays = getDays(today.getFullYear(),today.getMonth()+1);
@@ -93,5 +91,4 @@
 		render(week,days,yy,mm);
 	}
 	todayBtn.onclick = dumpToToday;
-
 })()
